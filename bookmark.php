@@ -1,0 +1,38 @@
+<?php 
+
+require_once('connection.php');
+require_once('functions.php');
+require_once('header.php');
+
+
+if (isset($_POST['submit'])) {
+   
+	$item_id = isset($_POST['item_id'])?trim($_POST['item_id']): '';
+
+
+    
+
+
+    $sql = "SELECT * FROM market WHERE id = '$item_id' and item_status = 1 AND active = 1";
+        $result = mysqli_Query($connect, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $marketid = $row['id'];
+    $item_name = $row['item_name'];
+    $user_id = $row['user_id'];
+    $posters_name = $row['posters_name'];
+    $item_duration = $row['item_duration'];
+    $item_location = $row['item_location'];
+    $item_category = $row['item_category'];
+    $item_image = $row['item_image'];
+    $item_date = $row['item_date'];
+
+      
+    $sql1 = "INSERT INTO bookmark(maket_id,sender_id,user_id, senders_name,item_name,item_location,item_duration,item_image,item_date) VALUES('$marketid', '$user_id', '$id', '$posters_name', '$item_name', '$item_location', '$item_duration', '$item_image', '$item_date')";
+    $result1 = mysqli_query($connect, $sql1);    
+
+ header("location: ../public/profile.php");
+       
+}
+
+
+?>
